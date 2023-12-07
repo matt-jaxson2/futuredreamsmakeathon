@@ -3,25 +3,33 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Dreams - MAKEATHON</title>
+    <title>Makeathon - Future Dreams</title>
+    <link rel="icon" href="https://futuredreams.org.uk/wp-content/uploads/2021/07/cropped-favicon-80x80.png" sizes="32x32">
+    <link rel="icon" href="https://futuredreams.org.uk/wp-content/uploads/2021/07/cropped-favicon-300x300.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="https://futuredreams.org.uk/wp-content/uploads/2021/07/cropped-favicon-300x300.png">
+    <meta name="msapplication-TileImage" content="https://futuredreams.org.uk/wp-content/uploads/2021/07/cropped-favicon-300x300.png">
     <style>
-      /* Reset CSS */
-      * {
-        background: transparent;
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
         border: 0;
         font-size: 100%;
-        list-style: none;
-        margin: 0;
-        outline: 0;
-        padding: 0;
-        text-decoration: none;
-        vertical-align: baseline;
+        line-height: 100%;
+        -webkit-text-size-adjust: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
       body {
         color: #3e3e3e;
         display: flex;
-        font-family: "Gill Sans", "Arial", sans-serif;
         flex-direction: column;
+        font-family: "Gill Sans", "Arial", sans-serif;
+        font-size: 1.125rem;
         margin: 0;
         min-height: 100vh;
       }
@@ -40,14 +48,11 @@
         letter-spacing: .05em;
         margin: 1rem 0 0;
       }
-      h1 .second-line {
-        font-size: 2.5rem;
-        display: block;
-        margin: 2rem 0;
-      }
       p {
+        letter-spacing: 0.02em;
+        line-height: 1.5;
         margin: 0 0 1rem;
-        max-width: 528px;
+        max-width: 540px;
       }
       a {
         color: #BA4A2C;
@@ -58,8 +63,19 @@
       a:focus {
         text-decoration: none;
       }
-      footer {
+      .site-content__second-line {
+        display: block;
+        font-family: "Chronicle Display", serif;
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin: 2rem 0;
+      }
+      .site-footer {
         margin-block-start: auto;
+        padding-block-end: 0;
+      }
+      .site-footer__copyright {
+        font-size: 0.875rem;
       }
       @media (min-width: 500px) {
         h1 .second-line {
@@ -69,22 +85,23 @@
     </style>
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <a class="site-header__logo site-logo" href="https://futuredreams.org.uk">
         <img src="https://futuredreams.org.uk/wp-content/themes/future-dreams/dist/img/logo.svg" alt="Future Dreams Logo" width="240" height="20">
       </a>
     </header>
 
     <main>
-      <section>
-        <h1>BE A PART OF SOMETHING BIG <b class="second-line">MAKEATHON</b></h1>
-        <p>Join in by creating a knitted rose and be part of our installation or join virtually by submitting your pictures and reasons why you are taking part and supporting.</p>
-        <p>Please visit <a href="https://futuredreams.org.uk/makeathon/">Future Dreams - MAKEATHON</a> for details.</p>
+      <section class="site-content">
+        <h1>COMING SOON&hellip; <span class="site-content__second-line">MAKEATHON</span></h1>
+        <p>Excitement is knitting up as we prepare to showcase all the fabulous knitted roses you've sent our way.</p>
+        <p>Keep those needles clicking and the yarn flowing - the showcase is about to begin!</p>
+        <p>Visit <a href="https://futuredreams.org.uk/makeathon?referrer=makeathon-landing">Makeathon - Future Dreams</a> for more details.</p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p class="site-footer__copyright">© 2023 Future Dreams. Registered charity in England and Wales 1123526</p>
+      <p class="site-footer__copyright">&copy; 2023 Future Dreams. Registered charity in England and Wales 1123526</p>
     </footer>
   </body>
 </html>
