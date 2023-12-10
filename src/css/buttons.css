@@ -1,0 +1,26 @@
+.button {
+  background-color: var(--white);
+  border-radius: 6px;
+  color: #3e3e3e;
+  display: block;
+  font-size: 1.125rem;
+  line-height: 1;
+  padding: 0.875rem;
+  text-align: center;
+  text-decoration: none;
+  text-wrap: nowrap;
+  transition: background-color 0.3s ease;
+  width: 90%;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #FDD2DF;
+}
+
+@media (min-width: 375px) {
+  .button {
+    min-width: 320px;
+    width: auto;
+  }
+}
