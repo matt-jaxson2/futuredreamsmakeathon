@@ -1,0 +1,121 @@
+.modal-open {
+  touch-action: none;
+  -webkit-overflow-scrolling: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.modal-background {
+  bottom: 0;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.modal-open .modal-background {
+  display: block;
+}
+
+.modal {
+  --padding-start: 0.3rem;
+  --padding-end: 2rem;
+
+  background-color: var(--white);
+  border-radius: 10px 10px 6px 6px;
+  bottom: 0;
+  left: 50%;
+  margin-block-start: var(--padding-start);
+  margin-block-end: var(--padding-end);
+  max-height: calc(100vh - calc(var(--padding-start) + var(--padding-end)));
+  max-width: 320px;
+  overflow: auto;
+  position: fixed;
+  transform: translate(-50%, calc(100% + var(--padding-end)));
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  z-index: 110;
+}
+
+.modal-open .modal {
+  transform: translate(-50%, 0);
+}
+
+.modal__close {
+  align-items: center;
+  background-color: transparent;
+  border-radius: 24px;
+  cursor: pointer;
+  display: flex;
+  height: 48px;
+  justify-content: center;
+  padding: calc(1rem - 3px);
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  transition: background-color 0.3s ease;
+  width: 48px;
+  z-index: 30;
+}
+
+.modal__image-wrapper {
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.modal__image.hidden + .content-loader {
+  display: none;
+}
+
+.modal__image-wrapper .content-loader {
+  z-index: -1;
+}
+
+.modal__image {
+  display: block;
+  max-width: 100%;
+}
+
+.modal__image-wrapper .content-loader {
+  left: 50%;
+  margin: -24px;
+  position: absolute;
+  top: 50%;
+}
+
+.modal__text {
+  font-size: 1.125rem;
+  letter-spacing: normal;
+  padding: 1rem 0.875rem 1.25rem;
+  text-align: center;
+}
+
+.modal__message {
+  font-weight: 400;
+  line-height: 1.166667;
+}
+
+.modal__cite {
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.166667;
+}
+
+.modal__cite::before {
+  background-color: var(--black);
+  content: '';
+  display: block;
+  height: 1px;
+  margin-block: 1rem;
+  margin-inline: auto;
+  width: 62px;
+}
+
+@media (min-width: 992px) {
+  .modal {
+    --padding-end: 6.25rem;
+  }
+}

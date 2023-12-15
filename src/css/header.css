@@ -1,5 +1,6 @@
 .site-header {
   margin-block-start: 3rem;
+  margin-block-end: 3rem;
   margin-inline: auto;
   text-align: center;
 }
@@ -26,6 +27,7 @@
 @media (min-width: 768px) {
   .site-header {
     margin-block-start: 4.375rem;
+    margin-block-end: 4.375rem;
   }
 
   .site-header__logo {

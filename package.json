@@ -4,11 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite src --host",
     "build": "vite build src --emptyOutDir",
-    "preview": "vite preview"
+    "preview": "yarn build; vite preview src --host"
   },
   "devDependencies": {
+    "express": "^4.18.2",
     "vite": "^5.0.0"
   }
 }

@@ -1,11 +1,10 @@
 :root {
-  --grid-columns: 5;
-
-  --white: #FFFFFF;
+  --white: #ffffff;
+  --black: #000000;
   --grey1: #3e3e3e;
-  --pink1: #ED8EAB;
-  --pink2: #FDD2DF;
-  --pink-opacity: rgba(234, 128, 176, 0.6);
+  --pink1: #ed8eab;
+  --pink2: #fdd2df;
+  --pink3: #de2b67;
 
   --font-body: 'Gill Sans', Arial, sans-serif;
   --font-header: 'Chronicle Display', serif;

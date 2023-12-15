@@ -1,7 +1,9 @@
 @import 'variables.css';
 @import 'reset.css';
 @import 'main.css';
+@import 'grid.css';
 @import 'buttons.css';
 @import 'header.css';
 @import 'navigation.css';
-@import 'footer.css';
+@import 'modal.css';
+@import 'loader.css';

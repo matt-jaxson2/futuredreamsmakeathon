@@ -12,37 +12,66 @@ body {
   letter-spacing: 0.1rem;
 }
 
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.hidden {
+  display: none;
+}
+
 .wrapper {
   background-image: url('/images/ribbon-small.jpg');
-  background-position: 100% 11rem;
+  background-position: 100% 10rem;
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 .wrapper::before {
   background: linear-gradient(177.34deg, var(--white) 37.03%, var(--pink1) 94.42%);
-  bottom: 0;
   content: '';
+  height: 110vh;
   left: 0;
   mix-blend-mode: multiply;
-  pointer-events: none;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
 }
 
+main::before {
+  background-color: var(--pink1);
+  bottom: 0;
+  content: '';
+  left: 0;
+  mix-blend-mode: multiply;
+  position: absolute;
+  right: 0;
+  top: 110vh;
+}
+
 .bottom-content {
-  margin-block-start: auto;
+  bottom: 0;
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+  width: 100%;
   z-index: 10;
 }
 
 @media (min-width: 576px) {
   .wrapper {
     background-image: url('/images/ribbon-large.jpg');
-    background-position: 100% 0;
-    background-size: cover;
+    background-position: 100% 30%;
+    background-size: 100%;
   }
 }
