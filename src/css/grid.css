@@ -9,12 +9,16 @@
   grid-template-columns: repeat(var(--columns), var(--size));
   grid-template-columns: repeat(var(--columns), minmax(var(--size), 1fr));
   justify-content: center;
-  margin-block-end: 12rem;
+  margin-block-end: 50vh;
   margin-inline: calc(calc(0px - var(--size)) / 2);
 }
 
 .image-grid--loading {
-  display: flex;
+  display: none;
+}
+
+.image-grid--loading + .content-loader {
+  display: block;
 }
 
 .image-grid__loader {
@@ -41,6 +45,10 @@
   right: 0;
   top: 0;
   transition: opacity 3s ease-out;
+}
+
+.image-grid__item--hidden .image-grid__image {
+  visibility: hidden;
 }
 
 .image-grid__item--highlighted,

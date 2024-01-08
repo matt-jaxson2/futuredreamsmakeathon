@@ -17,18 +17,18 @@
         <h1 class="site-header__title">BE PART OF SOMETHING BIG <span class="site-header__title-second-line">MAKEATHON</span></h1>
       </header>
 
-      <main class="main-content">
+      <main class="main-content js-main-content">
         <section class="main-content__section">
           <h2 class="sr-only">List of images and messages</h2>
-          <div class="image-grid js-image-grid image-grid--loading" aria-live="polite">
-            <div class="content-loader">Loading&hellip;</div>
-          </div>
+          <div class="image-grid js-image-grid image-grid--loading" aria-live="polite"></div>
+          <div class="content-loader">Loading&hellip;</div>
         </section>
       </main>
 
       <div class="bottom-content">
         <nav class="navigation">
           <a href="https://futuredreams.org.uk/makeathon?referrer=makeathon-landing" class="button">Submit an entry</a>
+          <button class="button js-open-search-button">Search for an entry</button>
         </nav>
       </div>
     </div>
@@ -37,28 +37,12 @@
       role="alertdialog"
       aria-hidden="true"
       aria-modal="true"
-      aria-label=""
       aria-describedby="modalDescription">
       <button class="modal__close js-modal__close" aria-label="close">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-width="2.049" d="M2 15.685 16 1.762M16 15.685 2 1.762"/></svg>
       </button>
-      <figure class="modal__content">
-        <div class="modal__image-wrapper">
-          <img 
-            src=""
-            class="modal__image js-modal__image"
-            alt=""
-            onload="this.className = 'modal__image js-modal__image image-loaded'"
-            onerror="this.className = 'modal__image js-modal__image hidden'">
-          <div class="content-loader"></div>
-        </div>
-        <figcaption class="modal__text">
-          <p id="modalDescription" class="modal__message js-modal__message"></p>
-          <cite class="modal__cite">By <span class="js-modal__cite-name"></span></cite>
-        </figcaption>
-      </figure>
+      <div class="modal__content js-modal__content"></div>
     </div>
-    <div class="modal-background js-modal-background"></div>
 
     <script src="/js/main.js" type="module"></script>
   </body>

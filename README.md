@@ -37,8 +37,8 @@ Paging of mosaic based on date i.e 50 images displayed,paging will take you to t
 ## Installation
 
 1. Clone repo:
-    1. ssh: `git clone git@github.com:matt-jaxson2/futuredreamsmakeathon.git`
-    1. https: `git clone https://github.com/matt-jaxson2/futuredreamsmakeathon.git`
+  1. ssh: `git clone git@github.com:matt-jaxson2/futuredreamsmakeathon.git`
+  1. https: `git clone https://github.com/matt-jaxson2/futuredreamsmakeathon.git`
 1. Run `yarn install` in root of repo.
 
 ## Development
@@ -52,4 +52,3 @@ From root of repo:
 ### Temporary local NodeJS server for development
 From root of repo:  
 `node src/__MOCK__/server.js` - Starts a local server returning static JSON results.  
-

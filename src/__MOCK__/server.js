@@ -10,9 +10,38 @@ app.use((req, res, next) => {
   next();
 });
 
-// Route to return JSON data.
+// Route to return all or partial results.
 app.get('/data', (req, res) => {
   res.json(jsonData);
+});
+
+// Route to return search results.
+app.get('/search', (req, res) => {
+  const searchTerm = req.query.term;
+
+  const matchingData = jsonData.filter(item => {
+    if (
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.message.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
+      return item;
+    }
+  });
+
+  res.json(matchingData);
+});
+
+// Route to return specific item.
+app.get('/item', (req, res) => {
+  const id = req.query.id;
+
+  const matchingData = jsonData.filter(item => {
+    if (item.id === id) {
+      return item;
+    }
+  });
+
+  res.json(matchingData);
 });
 
 app.listen(port, () => {
@@ -22,29 +51,45 @@ app.listen(port, () => {
 const jsonData = [
   {
       "name": "Christopher Constantinopolitanou",
-      "image_small": "https://picsum.photos/seed/1/100/100",
-      "image_medium": "https://picsum.photos/seed/1/320/320",
+      "imageSmall": "https://picsum.photos/seed/1/100/100",
+      "imageMedium": "https://picsum.photos/seed/1/320/320",
       "message": "Lots of content here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       "highlight": false,
-      "id": "id1"
+      "id": "1"
   },
   {
       "name": "Alice Smith",
-      "image_small": "https://picsum.photos/seed/2/100/100",
-      "image_medium": "https://picsum.photos/seed/2/320/320",
+      "imageSmall": "https://picsum.photos/seed/2/100/100",
+      "imageMedium": "https://picsum.photos/seed/2/320/320",
       "message": "HTML tags added here. <a href=\"/somedodgylink\" onclick=\"console.log(error)\"> Sed ut perspiciatis unde</a> omnis iste natus <br>error sit voluptatem <b>accusantium</b> doloremque.",
       "highlight": false,
-      "id": "id2"
-  }
+      "id": "2"
+  },
+  {
+    "name": "Edward Beaney-Withington",
+    "imageSmall": "https://picsum.photos/seed/3/100/100",
+    "imageMedium": "https://picsum.photos/seed/3/320/320",
+    "message": "Highlighted result lorem ipsum doloe sit amet doloremque.",
+    "highlight": false,
+    "id": "3"
+  },
+  {
+    "name": "Alice Smith",
+    "imageSmall": "https://picsum.photos/seed/4/100/100",
+    "imageMedium": "https://picsum.photos/seed/4/320/320",
+    "message": "Duolicate name lorem ipsum dolor doloremque.",
+    "highlight": false,
+    "id": "4"
+},
 ];
 
-for (let i = 20; i < 200; i++) {
+for (let i = jsonData.length + 1; i < 200; i++) {
     jsonData.push({
-        "name": "David Johnson",
-        "image_small": `https://picsum.photos/seed/${i}/100/100`,
-        "image_medium": `https://picsum.photos/seed/${i}/320/320`,
-        "message": `This is record ${i}'s message.`,
+        "name": `David Johnson${i}`,
+        "imageSmall": `https://picsum.photos/seed/${i}/100/100`,
+        "imageMedium": `https://picsum.photos/seed/${i}/320/320`,
+        "message": `This is record ${i}'s message. Lorem ipsum dolor sit amet.`,
         "highlight": false,
-        "id": `id${i}`
+        "id": `${i}`
     });
 }

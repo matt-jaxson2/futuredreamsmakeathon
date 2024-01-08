@@ -1,0 +1,55 @@
+.search {
+  margin-block-end: -1rem;
+}
+
+.search__message {
+  color: var(--pink3);
+  display: none;
+  font-size: 0.875rem;
+  letter-spacing: normal;
+  line-height: 1;
+  padding-block: 0.5rem 0.25rem;
+}
+
+.search__message--show {
+  display: flex;
+}
+
+.search__message::before {
+  align-items: center;
+  background-color: var(--pink3); /* Blue color, you can change this */
+  border-radius: 50%;
+  color: #fff;
+  content: '\2139';
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  height: 18px;
+  line-height: 18px;
+  margin-block-start: -2px;
+  margin-inline-end: 4px;
+  min-width: 18px;
+  width: 18px;
+}
+
+.search__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.search__buttons .button {
+  margin-block-start: 0.25rem;
+  width: 100%;
+}
+
+.search__buttons .search__clear-button {
+  margin-block-start: 0;
+  padding: 0;
+}
+
+@media (min-width: 375px) {
+  .search__buttons .button {
+    min-width: auto;
+  }
+}

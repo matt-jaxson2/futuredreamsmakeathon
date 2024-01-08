@@ -62,16 +62,23 @@ main::before {
 .bottom-content {
   bottom: 0;
   left: 50%;
+  pointer-events: none;
   position: fixed;
   transform: translateX(-50%);
   width: 100%;
   z-index: 10;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .wrapper {
     background-image: url('/images/ribbon-large.jpg');
-    background-position: 100% 30%;
+    background-position: 100% 0;
     background-size: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    background-position: 100% -100px;
   }
 }

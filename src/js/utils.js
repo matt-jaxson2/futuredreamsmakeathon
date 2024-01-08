@@ -1,7 +1,9 @@
-export const resetGridItems = () => {
-  document.querySelectorAll('.image-grid__item').forEach(element => {
-    element.classList.remove('image-grid__item--highlighted');
-  });
+export const isSearch = () => {
+  return window.location.hash.includes('search/');
+};
+
+export const setRoute = (route = '') => {
+  window.location.hash = route;
 };
 
 export const encodeHTML = (html) => {

@@ -1,5 +1,6 @@
 .navigation {
   display: flex;
+  flex-flow: column;
   justify-content: center;
   margin-block-end: 2rem;
 }

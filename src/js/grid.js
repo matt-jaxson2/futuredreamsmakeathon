@@ -1,21 +1,109 @@
 import { MakeathonAPI } from './api.js';
-import { encodeHTML } from './utils.js';
+import { Modal } from './modal.js';
+import { encodeHTML, isSearch } from './utils.js';
 
 export class Grid {
   constructor() {
+    this.customRenderEvent = new CustomEvent('grid:rendered');
+  }
+
+  init() {
     this.makeathonAPI = new MakeathonAPI();
-    this.customRenderEvent = new CustomEvent('gridRendered');
-    this.setGrid();
+    this.modal = new Modal();
+
+    if (!isSearch()) {
+      this.setGrid();
+    }
+
+    this.setElements();
+    this.setEvents();
   }
 
-  getData() {
-    return this.makeathonAPI.fetchData();
+  setElements() {
+    this.elements = {
+      grid: document.querySelector('.js-image-grid')
+    }
   }
 
-  async setGrid() {
-    let content = '';
-    const data = await this.getData();
+  setEvents() {
+    document.addEventListener('grid:rendered', () => {
+      const route = window.location.hash;
+
+      if (!route.includes('entry')) return;
+
+      const element = document.querySelector(`${route}-target`);
+      this.setModalContent(element);
+    });
+
+    document.addEventListener('navigation:home', () => {
+      this.modal.closeModal();
+    });
+
+    document.addEventListener('route:entry', () => {
+      const element = document.querySelector(`${window.location.hash}-target`);
+      if (element) {
+        this.setModalContent(element);
+      } else {
+        this.setGrid();
+      }
+    });
+
+    this.elements.grid.addEventListener('click', event => {
+      const element = event.target;
+
+      if (element.tagName === 'A') {
+        this.setModalContent(element);
+      }
+    });
+  }
+
+  getRouteId() {
+    return window.location.hash.replace('#entry', '');
+  }
+
+  async setModalContent(element) {
+    if (!element) return;
+
+    const { dataset: { image, message, name } } = element;
+    const content = `
+      <figure>
+        <div class="modal__image-wrapper">
+          <img src="${image}" class="modal__image" alt="Photo of ${name}'s knitted flower">
+          <div class="content-loader"></div>
+        </div>
+        <figcaption class="modal__text">
+          <p id="modalDescription" class="modal__message">${encodeHTML(message)}</p>
+          <cite class="modal__cite">By ${name}</cite>
+        </figcaption>
+      </figure>
+    `;
+
+    this.modal.setContent(content);
+    this.modal.openModal();
+  }
+
+  lazyImages(images) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const image = entry.target;
+          const { dataset: { alt, src } } = image;
+
+          image.src = src;
+          image.alt = alt;
+
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    images.forEach(image => imageObserver.observe(image));
+  }
+
+  async setGrid(results) {
+    const data = results || await this.makeathonAPI.fetchData('data');
     const dataLength = data.length < 50 ? 50 : data.length;
+    let content = '';
 
     for (let i = 0; i < dataLength; i++) {
       const item = data[i];
@@ -25,22 +113,15 @@ export class Grid {
           <div class="image-grid__item-wrapper"><div class="image-grid__item image-grid__item--placeholder" aria-hidden="true"></div></div>
         `;
       } else {
-        const { highlight, image_small, image_medium, message, name, id } = item;
+        const { highlight, imageSmall, imageMedium, message, name, id } = item;
+        const entryId = `entry${id}`;
         const highlightedClass = highlight ? ' image-grid__item--highlighted' : '';
-        const encodedMessage = encodeHTML(message);
 
         content += `
           <div class="image-grid__item-wrapper">
-            <a id="${id}-target" href="#${id}" class="image-grid__item${highlightedClass}" data-id="${id}" data-image="${image_medium}" data-name="${name}" data-message="${encodedMessage}">
-              <p class="sr-only">See a larger image and read the message from ${name}</p>
-              <img
-                class="image-grid__image"
-                loading="lazy"
-                src="${image_small}"
-                alt="Photo of ${name}'s knitted flower"
-                onload="this.className = 'image-grid__image image-loaded'"
-                onerror="this.className = 'image-grid__image hidden'">
-              <div class="image-grid__loader"></div>
+            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item${highlightedClass}" data-id="${entryId}" data-image="${imageMedium}" data-name="${name}" data-message="${encodeHTML(message)}">
+              <p class="sr-only">Read the message from ${name}</p>
+              <img class="image-grid__image js-lazy-image" data-src="${imageSmall}" data-alt="Photo of ${name}'s knitted flower" />
             </a>
           </div>
         `;
@@ -59,6 +140,8 @@ export class Grid {
     target.classList.remove('image-grid--loading');
 
     target.innerHTML = content;
+
+    this.lazyImages(target.querySelectorAll('.js-lazy-image'));
 
     this.renderEvent();
   }

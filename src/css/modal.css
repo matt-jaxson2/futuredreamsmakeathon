@@ -1,10 +1,3 @@
-.modal-open {
-  touch-action: none;
-  -webkit-overflow-scrolling: none;
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
 .modal-background {
   bottom: 0;
   display: none;
@@ -22,7 +15,7 @@
 
 .modal {
   --padding-start: 0.3rem;
-  --padding-end: 2rem;
+  --padding-end: 5.125rem;
 
   background-color: var(--white);
   border-radius: 10px 10px 6px 6px;
@@ -40,6 +33,10 @@
   z-index: 110;
 }
 
+.modal .search-form {
+  padding: 2rem 1.5rem 1.5rem;
+}
+
 .modal-open .modal {
   transform: translate(-50%, 0);
 }
@@ -52,6 +49,7 @@
   display: flex;
   height: 48px;
   justify-content: center;
+  mix-blend-mode: difference;
   padding: calc(1rem - 3px);
   position: absolute;
   right: 3px;
@@ -61,8 +59,13 @@
   z-index: 30;
 }
 
+.modal__content {
+  padding: 2rem 1.5625rem 1.5625rem;
+}
+
 .modal__image-wrapper {
   aspect-ratio: 1;
+  margin: -2rem -1.5625rem 1.5625rem;
   position: relative;
 }
 
@@ -80,16 +83,16 @@
 }
 
 .modal__image-wrapper .content-loader {
-  left: 50%;
-  margin: -24px;
-  position: absolute;
-  top: 50%;
+  display: block;
+}
+
+.image-loaded + .content-loader {
+  display: none;
 }
 
 .modal__text {
   font-size: 1.125rem;
   letter-spacing: normal;
-  padding: 1rem 0.875rem 1.25rem;
   text-align: center;
 }
 
@@ -116,6 +119,6 @@
 
 @media (min-width: 992px) {
   .modal {
-    --padding-end: 6.25rem;
+    --padding-end: 9.25rem;
   }
 }
