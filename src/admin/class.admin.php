@@ -129,10 +129,10 @@ class admin
                     continue;
                 }                    
 
-                $newRow['name'] = "$row[1] $row[3]";
+                $newRow['name'] = htmlspecialchars("$row[1] $row[3]");
                 $newRow['imageSmall'] = "./entries/images/$row[15]-small.jpg";
                 $newRow['imageMedium'] = "./entries/images/$row[15]-medium.jpg";
-                $newRow['message'] = $row[7];
+                $newRow['message'] = htmlspecialchars($row[7]);
                 $newRow['highlight'] = false;
                 $newRow['id'] = $row[15];
         
