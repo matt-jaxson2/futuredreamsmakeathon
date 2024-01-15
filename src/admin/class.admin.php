@@ -37,7 +37,7 @@ class admin
             return $formatter->format(count($existingData));
         }
 
-        return "";  // Handle missing data gracefully
+        return "zero";
     }
 
     /**
@@ -59,7 +59,7 @@ class admin
             }
         }
     
-        return null;  // Data file not found
+        return null;
     }
 
     /**
@@ -89,7 +89,6 @@ class admin
                 throw new Exception("Failed to move uploaded file.");
             }
         } catch (Exception $e) {
-            // Handle file validation or moving errors gracefully, e.g., log the error and potentially throw a specific exception
             throw new RuntimeException("File handling error: " . $e->getMessage());
         }
     }
@@ -106,7 +105,6 @@ class admin
             array_shift($data);
             return $data;
         } catch (Exception $e) {
-            // Handle CSV parsing errors gracefully, e.g., log the error and return an empty array
             return [];
         }
     }
@@ -141,7 +139,6 @@ class admin
                 array_push($newData, $newRow);
 
             } catch (Exception $e) {
-                // Handle errors gracefully, e.g., log the error and potentially skip the row
                 print_r($e);
             }
         }
@@ -157,10 +154,10 @@ class admin
     private function saveDataToJson(array $data): void
     {
         try {
-            $json = json_encode($data, JSON_THROW_ON_ERROR); // Throw exception on JSON encoding errors
+            $json = json_encode($data, JSON_THROW_ON_ERROR);
             file_put_contents('../entries/data.json', $json);
         } catch (Exception $e) {
-            // Handle file writing or JSON encoding errors appropriately, e.g., log the error
+            print_r($e);
         }
     }
 
@@ -214,7 +211,7 @@ class admin
                     imagedestroy($im);
                 }
             } catch (Exception $e) {
-                // Log or handle image resizing errors appropriately
+                print_r($e);
             }
         }
     }            
