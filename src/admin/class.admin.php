@@ -189,17 +189,31 @@ class admin
     
                     // Preserve aspect ratio
                     $aspect = ($height / $width);
+
                     $newHeight = floor($newWidth * $aspect);
-    
+
                     $newImage = null;
+
                     if ($size === "small") {
-                        $sq = min($newWidth, $newHeight);
-                        $newImage = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $sq, 'height' => $sq]);
+
+                        $sq = max($newWidth, $newHeight);
+
+                        if ($width > $height) {
+                            $aspect = ($width / $height);
+                            $newHeight = $newWidth;
+                            $newWidth = floor($newHeight * $aspect);
+                        }
+
+                        $offsetX = floor(($sq - $newWidth)/2);
+                        $offsetY = floor(($sq - $newHeight)/2);
+
+                        $newImage = imagecreatetruecolor(self::SMALL_WIDTH, self::SMALL_WIDTH);
+                        imagecopyresampled($newImage, $im, $offsetX, $offsetY, 0, 0, $newWidth, $newHeight, $width, $height);
+
                     } else {
                         $newImage = imagecreatetruecolor($newWidth, $newHeight);
+                        imagecopyresampled($newImage, $im, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
                     }
-
-                    imagecopyresized($newImage, $im, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
                     if ($newImage) {
                         imagejpeg($newImage, $targetFile);
