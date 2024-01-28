@@ -1,0 +1,34 @@
+.wrapper--admin .main-content {
+  margin-inline: auto;
+  max-width: 475px;
+  padding-inline: 1rem;
+  width: 100%;
+}
+
+.wrapper--admin .main-content__section {
+  background-color: var(--white);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.wrapper--admin .main-content__header {
+  margin-block-end: 1rem;
+}
+
+.wrapper--admin .button {
+  margin-block-start: 0.5rem;
+  margin-block-end: 1rem;
+  width: 100%;
+}
+
+.wrapper--admin .message {
+  display: none;
+}
+
+.wrapper--admin [class*='message--'] {
+  display: block;
+}
+
+.wrapper--admin p {
+  letter-spacing: normal;
+}

@@ -96,7 +96,7 @@ export class Search {
 
     switch (messageType) {
       case 'no-results':
-        message = 'Oops! Your search came up empty.';
+        message = 'Your search came up empty.';
         break;
 
       case 'characters':
@@ -104,7 +104,7 @@ export class Search {
         break;
 
       default:
-        message = 'Uh-oh, looks like our search got a little lost.';
+        message = 'Looks like our search got a little lost.';
     }
 
     this.elements.searchMessage.classList.add('search__message--show');
@@ -119,7 +119,7 @@ export class Search {
   setContent() {
     const content = `
       <form class="search js-search">
-        <label for="search-input" id="modalDescription">Search for an entry</label>
+        <label for="search-input" id="modalLabel">Search for an entry</label>
         <input id="search-input" class="search__input js-search__input" type="text" aria-describedby="search-message" value="${this.query}">
         <span id="search-message" class="search__message js-search__message" aria-live="assertive"></span>
         <div class="search__buttons">

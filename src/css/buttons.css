@@ -44,6 +44,16 @@
   text-decoration: none;
 }
 
+.button--style4 {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.button--style4:not(:disabled):hover,
+.button--style4:not(:disabled):focus {
+  background-color: var(--pink3);
+}
+
 .button + .button {
   margin-block-start: 0.25rem;
 }

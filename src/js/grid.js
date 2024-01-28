@@ -43,8 +43,6 @@ export class Grid {
       const element = document.querySelector(`${window.location.hash}-target`);
       if (element) {
         this.setModalContent(element);
-      } else {
-        this.setGrid();
       }
     });
 
@@ -73,7 +71,7 @@ export class Grid {
         </div>
         <figcaption class="modal__text">
           <p id="modalDescription" class="modal__message">${encodeHTML(message)}</p>
-          <cite class="modal__cite">By ${name}</cite>
+          <cite class="modal__cite" id="modalLabel">By ${name}</cite>
         </figcaption>
       </figure>
     `;
@@ -101,7 +99,7 @@ export class Grid {
   }
 
   async setGrid(results) {
-    const data = results || await this.makeathonAPI.fetchData('data');
+    const data = results || await this.makeathonAPI.fetchData('entries/data.json', 'cached:entries');
     const dataLength = data.length < 50 ? 50 : data.length;
     let content = '';
 
@@ -116,12 +114,16 @@ export class Grid {
         const { highlight, imageSmall, imageMedium, message, name, id } = item;
         const entryId = `entry${id}`;
         const highlightedClass = highlight ? ' image-grid__item--highlighted' : '';
+        const image = {
+          small: `https://futuredreamsmakeathon.org.uk/${imageSmall}`,
+          medium: `https://futuredreamsmakeathon.org.uk/${imageMedium}`
+        }
 
         content += `
           <div class="image-grid__item-wrapper">
-            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item${highlightedClass}" data-id="${entryId}" data-image="${imageMedium}" data-name="${name}" data-message="${encodeHTML(message)}">
+            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item${highlightedClass}" data-id="${entryId}" data-image="${image.medium}" data-name="${name}" data-message="${encodeHTML(message)}">
               <p class="sr-only">Read the message from ${name}</p>
-              <img class="image-grid__image js-lazy-image" data-src="${imageSmall}" data-alt="Photo of ${name}'s knitted flower" />
+              <img class="image-grid__image js-lazy-image" data-src="${image.small}" data-alt="Photo of ${name}'s knitted flower" />
             </a>
           </div>
         `;

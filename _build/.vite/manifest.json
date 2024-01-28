@@ -1,0 +1,28 @@
+{
+  "images/logo-wys.png": {
+    "file": "assets/logo-wys-36Bzadx_.png",
+    "src": "images/logo-wys.png"
+  },
+  "images/ribbon-large.jpg": {
+    "file": "assets/ribbon-large-UIw7ABRU.jpg",
+    "src": "images/ribbon-large.jpg"
+  },
+  "images/ribbon-small.jpg": {
+    "file": "assets/ribbon-small-gALt1wBi.jpg",
+    "src": "images/ribbon-small.jpg"
+  },
+  "index.html": {
+    "assets": [
+      "assets/ribbon-small-gALt1wBi.jpg",
+      "assets/ribbon-large-UIw7ABRU.jpg",
+      "assets/logo-wys-36Bzadx_.png"
+    ],
+    "file": "assets/index-rPuYOLEA.js",
+    "isEntry": true,
+    "src": "index.html"
+  },
+  "style.css": {
+    "file": "assets/style-ZPiV4zL2.css",
+    "src": "style.css"
+  }
+}

@@ -18,7 +18,7 @@ Static display of the mosaic with hard coded json array on page. With blank hold
 Dynamic feed of images with url controlled inclusion of a single defined image i.e. I want to see the image I uploaded in the mosaic. The mosaic is loaded with my image in a highlighted state alongside x random images. 
 
 ### MDV:  
-Search for images via email {email should not be exposed on page}
+Search for images.
 
 Paging of mosaic based on date i.e 50 images displayed,paging will take you to the next 50 oldest.
 
@@ -28,11 +28,13 @@ Paging of mosaic based on date i.e 50 images displayed,paging will take you to t
 - HTML
 - JavaScript
 - CSS
+- PHP
 
 ## Requirements
 
 - Node (latest)
 - Yarn
+- PHP 8.x
 
 ## Installation
 
@@ -47,8 +49,4 @@ Paging of mosaic based on date i.e 50 images displayed,paging will take you to t
 From root of repo:  
 `yarn dev` - Starts local 'DEV' server and watches for changes.  
 `yarn build` - Compiles code from `src` folder into `_build`. This is the code that will be deployed.  
-`yarn preview` - Compiles code then starts local 'PROD' server.  
-
-### Temporary local NodeJS server for development
-From root of repo:  
-`node src/__MOCK__/server.js` - Starts a local server returning static JSON results.  
+`yarn prod` - Compiles code then starts local 'PROD' server.  

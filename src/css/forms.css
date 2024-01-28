@@ -7,9 +7,11 @@ label {
 }
 
 input {
+  background-color: var(--white);
   border: 1px solid var(--grey2);
   border-radius: 6px;
   padding: 0.75rem;
+  width: 100%;
 }
 
 input[type='text'],
@@ -17,3 +19,14 @@ input[type='search'] {
   width: 100%;
 }
 
+.message {
+  margin-block-end: 1rem;
+}
+
+.message--error {
+  color: var(--error);
+}
+
+.message--success {
+  color: var(--success);
+}

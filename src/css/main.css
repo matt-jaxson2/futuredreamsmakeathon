@@ -43,12 +43,13 @@ body {
   height: 110vh;
   left: 0;
   mix-blend-mode: multiply;
+  pointer-events: none;
   position: absolute;
   right: 0;
   top: 0;
 }
 
-main::before {
+.wrapper::after {
   background-color: var(--pink1);
   bottom: 0;
   content: '';
@@ -57,6 +58,10 @@ main::before {
   position: absolute;
   right: 0;
   top: 110vh;
+}
+
+.main-content {
+  z-index: 10;
 }
 
 .bottom-content {

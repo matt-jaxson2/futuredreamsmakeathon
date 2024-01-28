@@ -1,6 +1,16 @@
 export default {
   build: {
     outDir: '../_build',
-    target: 'esnext',
+    manifest: true,
+    cssCodeSplit: false,
+  },
+  server: {
+    proxy: {
+      '/entries': {
+        target: 'https://futuredreamsmakeathon.org.uk',
+        changeOrigin: true,
+      },
+      cors: false,
+    },
   },
 };
