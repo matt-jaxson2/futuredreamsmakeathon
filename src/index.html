@@ -13,17 +13,42 @@
   <body>
     <div class="wrapper">
       <header class="site-header">
-        <img class="site-header__logo" src="/images/logo.svg" alt="Future Dreams">
+        <div class="site-header__logos-wrapper">
+          <img class="site-header__logo" src="/images/logo.svg" alt="Future Dreams">
+          <span class="site-header__divider"></span>
+          <img class="site-header__logo-2" src="/images/logo-wys.png" alt="West Yorkshire Spinners">
+        </div>
         <h1 class="site-header__title">BE PART OF SOMETHING BIG <span class="site-header__title-second-line">MAKEATHON</span></h1>
       </header>
 
-      <main></main>
+      <main class="main-content js-main-content">
+        <section class="main-content__section">
+          <h2 class="sr-only">List of images and messages</h2>
+          <div class="image-grid js-image-grid image-grid--loading" aria-live="polite"></div>
+          <div class="content-loader">Loading&hellip;</div>
+        </section>
+      </main>
 
       <div class="bottom-content">
         <nav class="navigation">
           <a href="https://futuredreams.org.uk/makeathon?referrer=makeathon-landing" class="button">Submit an entry</a>
+          <!-- <button class="button js-open-search-button">Search for an entry</button> -->
         </nav>
       </div>
     </div>
+
+    <div class="modal js-modal"
+      role="alertdialog"
+      aria-hidden="true"
+      aria-modal="true"
+      aria-labelledby="modalLabel"
+      aria-describedby="modalDescription">
+      <button class="modal__close js-modal__close" aria-label="close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-width="2.049" d="M2 15.685 16 1.762M16 15.685 2 1.762"/></svg>
+      </button>
+      <div class="modal__content js-modal__content"></div>
+    </div>
+
+    <script src="/js/main.js" type="module"></script>
   </body>
 </html>

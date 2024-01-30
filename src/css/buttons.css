@@ -1,26 +1,71 @@
 .button {
+  align-self: center;
   background-color: var(--white);
   border-radius: 6px;
-  color: #3e3e3e;
+  color: var(--grey1);
+  cursor: pointer;
   display: block;
+  font-family:var(--font-body);
   font-size: 1.125rem;
+  letter-spacing: 0.1rem;
   line-height: 1;
   padding: 0.875rem;
+  pointer-events: all;
   text-align: center;
   text-decoration: none;
   text-wrap: nowrap;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   width: 90%;
 }
 
-.button:hover,
-.button:focus {
-  background-color: #FDD2DF;
+.button:not(:disabled):hover,
+.button:not(:disabled):focus {
+  background-color: var(--pink3);
+  color: var(--white);
+}
+
+.button--style2 {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.button--style3 {
+  background-color: transparent;
+  color: var(--pink3);
+  font-size: 0.875rem;
+  line-height: 1.285714;
+  text-decoration: underline;
+}
+
+.button--style3:not(:disabled):hover,
+.button--style3:not(:disabled):focus {
+  background-color: transparent;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.button--style4 {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.button--style4:not(:disabled):hover,
+.button--style4:not(:disabled):focus {
+  background-color: var(--pink3);
+}
+
+.button + .button {
+  margin-block-start: 0.25rem;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 @media (min-width: 375px) {
   .button {
-    min-width: 320px;
+    min-width: 318px;
     width: auto;
   }
 }

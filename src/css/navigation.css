@@ -1,7 +1,8 @@
 .navigation {
   display: flex;
+  flex-flow: column;
   justify-content: center;
-  margin-block-end: 1.75rem;
+  margin-block-end: 2rem;
 }
 
 @media (min-width: 992px) {

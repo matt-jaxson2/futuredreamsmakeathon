@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build src --emptyOutDir",
-    "preview": "vite preview"
+    "dev": "vite src --host;",
+    "build": "vite build src --emptyOutDir; cp -a src/admin/ _build/admin/",
+    "prod": "yarn build; vite preview src --host"
   },
   "devDependencies": {
     "vite": "^5.0.0"

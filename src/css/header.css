@@ -1,14 +1,33 @@
 .site-header {
   margin-block-start: 3rem;
+  margin-block-end: 3rem;
   margin-inline: auto;
   text-align: center;
 }
 
-.site-header__logo {
-  display: inline-block;
+.site-header__logos-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
   margin-block-end: 2rem;
-  height: 14px;
+}
+
+.site-header__divider::before {
+  content: '\2715';
+  display: block;
+}
+
+.site-header__logos-wrapper img {
+  max-width: 100%;
+  height: auto;
+}
+
+.site-header__logo {
   width: 166px
+}
+
+.site-header__logo-2 {
+  width: 90px
 }
 
 .site-header__title {
@@ -26,14 +45,23 @@
 @media (min-width: 768px) {
   .site-header {
     margin-block-start: 4.375rem;
-  }
-
-  .site-header__logo {
     margin-block-end: 4.375rem;
   }
 
-  .site-header__logo-image {
-    height: 25px;
-    width: 296px
+  .site-header__logos-wrapper {
+    gap: 1.5rem;
+    margin-block-end: 4.375rem;
+  }
+
+  .site-header__divider::before {
+    font-size: 1.5rem;
+  }
+
+  .site-header__logo {
+    width: 252px
+  }
+
+  .site-header__logo-2 {
+    width: 166px
   }
 }

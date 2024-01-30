@@ -1,6 +1,12 @@
 @import 'variables.css';
 @import 'reset.css';
 @import 'main.css';
+@import 'grid.css';
 @import 'buttons.css';
 @import 'header.css';
 @import 'navigation.css';
+@import 'modal.css';
+@import 'forms.css';
+@import 'search.css';
+@import 'loader.css';
+@import 'admin.css';
