@@ -120,20 +120,20 @@ class admin
         foreach ($data as $row) {
             try {
                 $newRow = [];
-                if (!empty($row[6]) && !empty($row[15])) {
+                if (!empty($row[5]) && !empty($row[14])) {
                     foreach (['small', 'medium'] as $size) {
-                        $this->resizeImage($row[6], $row[15], $size);    
+                        $this->resizeImage($row[5], $row[14], $size);
                     }
                 } else {
                     continue;
                 }                    
 
                 $newRow['name'] = strip_tags("$row[1] $row[3]");
-                $newRow['imageSmall'] = "./entries/images/$row[15]-small.jpg";
-                $newRow['imageMedium'] = "./entries/images/$row[15]-medium.jpg";
-                $newRow['message'] = strip_tags($row[7]);
+                $newRow['imageSmall'] = "./entries/images/$row[14]-small.jpg";
+                $newRow['imageMedium'] = "./entries/images/$row[14]-medium.jpg";
+                $newRow['message'] = strip_tags($row[6]);
                 $newRow['highlight'] = false;
-                $newRow['id'] = $row[15];
+                $newRow['id'] = $row[14];
         
                 array_push($newData, $newRow);
 
@@ -176,9 +176,6 @@ class admin
             default => throw new Exception("Invalid image size specified."),
         };
 
-        $exif = exif_read_data($imageUrl);
-        $rotation = $exif['Orientation'];
-
         $targetFile = "../entries/images/$entryId-$size.jpg";
         if (!file_exists($targetFile)) {
             try {
@@ -218,9 +215,6 @@ class admin
                     }
 
                     if ($newImage) {
-                        if ($rotation == 6) {
-                            $newImage = imagerotate($newImage, 270, 0);
-                        }
                         imagejpeg($newImage, $targetFile);
                     } else {
                         throw new Exception("Failed to create resized image.");
