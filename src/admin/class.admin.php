@@ -120,7 +120,6 @@ class admin
         foreach ($data as $row) {
             try {
                 $newRow = [];
-
                 if (!empty($row[6]) && !empty($row[15])) {
                     foreach (['small', 'medium'] as $size) {
                         $this->resizeImage($row[6], $row[15], $size);    
@@ -177,12 +176,15 @@ class admin
             default => throw new Exception("Invalid image size specified."),
         };
 
+        $exif = exif_read_data($imageUrl);
+        $rotation = $exif['Orientation'];
+
         $targetFile = "../entries/images/$entryId-$size.jpg";
         if (!file_exists($targetFile)) {
             try {
                 $img = file_get_contents($imageUrl);
                 $im = imagecreatefromstring($img);
-    
+
                 try {
                     $width = imagesx($im);
                     $height = imagesy($im);
@@ -216,6 +218,9 @@ class admin
                     }
 
                     if ($newImage) {
+                        if ($rotation == 6) {
+                            $newImage = imagerotate($newImage, 270, 0);
+                        }
                         imagejpeg($newImage, $targetFile);
                     } else {
                         throw new Exception("Failed to create resized image.");
