@@ -176,9 +176,6 @@ class admin
             default => throw new Exception("Invalid image size specified."),
         };
 
-        $exif = exif_read_data($imageUrl);
-        $rotation = $exif['Orientation'];
-
         $targetFile = "../entries/images/$entryId-$size.jpg";
         if (!file_exists($targetFile)) {
             try {
@@ -218,9 +215,6 @@ class admin
                     }
 
                     if ($newImage) {
-                        if ($rotation == 6) {
-                            $newImage = imagerotate($newImage, 270, 0);
-                        }
                         imagejpeg($newImage, $targetFile);
                     } else {
                         throw new Exception("Failed to create resized image.");
