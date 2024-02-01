@@ -21,7 +21,6 @@ class admin
         $data = $this->parseCsvData($file['name']);
         $processedData = $this->processRows($data);
         $this->saveDataToJson($processedData);
-
         $formatter = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
         return $formatter->format(count($processedData));
     }
@@ -95,18 +94,29 @@ class admin
 
     /**
      * @param string $fileName
+     * @param mixed $delimiter
      * 
      * @return array
      */
-    private function parseCsvData(string $fileName): array
+    private function parseCsvData($fileName, $delimiter=',')
     {
-        try {
-            $data = array_map('str_getcsv', file('./uploads/' . $fileName));
-            array_shift($data);
-            return $data;
-        } catch (Exception $e) {
-            return [];
+        if(!file_exists('./uploads/' . $fileName) || !is_readable('./uploads/' . $fileName))
+            return FALSE;
+
+        $header = NULL;
+        $data = array();
+        if (($handle = fopen('./uploads/' . $fileName, 'r')) !== FALSE)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+            {
+                if(!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
         }
+        return $data;
     }
 
     /**
@@ -120,20 +130,20 @@ class admin
         foreach ($data as $row) {
             try {
                 $newRow = [];
-                if (!empty($row[5]) && !empty($row[14])) {
+                if (!empty($row['File']) && !empty($row['Entry ID'])) {
                     foreach (['small', 'medium'] as $size) {
-                        $this->resizeImage($row[5], $row[14], $size);
+                        $this->resizeImage($row['File'], $row['Entry ID'], $size);
                     }
                 } else {
                     continue;
                 }                    
 
-                $newRow['name'] = strip_tags("$row[1] $row[3]");
-                $newRow['imageSmall'] = "./entries/images/$row[14]-small.jpg";
-                $newRow['imageMedium'] = "./entries/images/$row[14]-medium.jpg";
-                $newRow['message'] = strip_tags($row[6]);
+                $newRow['name'] = strip_tags($row['Name (First)'] . " " . $row['Name (Last)']);
+                $newRow['imageSmall'] = "./entries/images/".$row['Entry ID']."-small.jpg";
+                $newRow['imageMedium'] = "./entries/images/".$row['Entry ID']."-medium.jpg";
+                $newRow['message'] = strip_tags($row['Please write your message in the space below.']);
                 $newRow['highlight'] = false;
-                $newRow['id'] = $row[14];
+                $newRow['id'] = $row['Entry ID'];
         
                 array_push($newData, $newRow);
 
