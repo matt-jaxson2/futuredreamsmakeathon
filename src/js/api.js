@@ -1,6 +1,6 @@
 export class MakeathonAPI {
-  async fetchData(url, cacheKey, clearCache = false, options = {}) {
-    const cachedData = localStorage.getItem(cacheKey);
+  async fetchData(url, options = {}) {
+    const cachedData = sessionStorage.getItem(url);
 
     if (cachedData && !clearCache) {
       return JSON.parse(cachedData);
@@ -11,7 +11,7 @@ export class MakeathonAPI {
         });
         const data = await response.json();
 
-        localStorage.setItem(cacheKey, JSON.stringify(data));
+        sessionStorage.setItem(url, JSON.stringify(data));
 
         return data;
       } catch (error) {

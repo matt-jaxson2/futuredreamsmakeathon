@@ -34,3 +34,7 @@ const _router = new Router({
   //   });
   // },
 });
+
+window.addEventListener('beforeunload', () => {
+  sessionStorage.clear();
+});
