@@ -99,7 +99,7 @@ export class Grid {
   }
 
   async setGrid(results) {
-    const data = results || await this.makeathonAPI.fetchData('entries/data.json', 'cached:entries');
+    const data = results || await this.makeathonAPI.fetchData('entries/data.json');
     const dataLength = data.length < 50 ? 50 : data.length;
     let content = '';
 
