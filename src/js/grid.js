@@ -111,9 +111,9 @@ export class Grid {
           <div class="image-grid__item-wrapper"><div class="image-grid__item image-grid__item--placeholder" aria-hidden="true"></div></div>
         `;
       } else {
-        const { highlight, imageSmall, imageMedium, message, name, id } = item;
+        const { imageSmall, imageMedium, message, name, id } = item;
         const entryId = `entry${id}`;
-        const highlightedClass = highlight ? ' image-grid__item--highlighted' : '';
+        const setName = !!name.trim() ? name : 'Anonymous';
         const image = {
           small: `https://futuredreamsmakeathon.org.uk/${imageSmall}`,
           medium: `https://futuredreamsmakeathon.org.uk/${imageMedium}`
@@ -121,9 +121,9 @@ export class Grid {
 
         content += `
           <div class="image-grid__item-wrapper">
-            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item${highlightedClass}" data-id="${entryId}" data-image="${image.medium}" data-name="${name}" data-message="${encodeHTML(message)}">
-              <p class="sr-only">Read the message from ${name}</p>
-              <img class="image-grid__image js-lazy-image" data-src="${image.small}" data-alt="Photo of ${name}'s knitted flower" />
+            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item" data-id="${entryId}" data-image="${image.medium}" data-name="${setName}" data-message="${encodeHTML(message)}">
+              <p class="sr-only">Read the message from ${setName}</p>
+              <img class="image-grid__image js-lazy-image" data-src="${image.small}" data-alt="Photo of ${setName}'s knitted flower" />
             </a>
           </div>
         `;

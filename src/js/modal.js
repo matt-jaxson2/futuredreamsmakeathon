@@ -1,5 +1,7 @@
 export class Modal {
   constructor() {
+    this.keyPress = this.keyPress.bind(this);
+
     this.setElements();
     this.setEvents();
   }
@@ -34,14 +36,21 @@ export class Modal {
     }
   }
 
+  keyPress(event) {
+    if (event.key === 'Escape') {
+      this.closeModal();
+    }
+  }
+
   openModal() {
     this.elements.body.classList.add('modal-open');
-    this.elements.modal.setAttribute('aria-hidden', false);
     this.elements.closeButton.focus();
+
+    document.addEventListener('keydown', this.keyPress);
   }
 
   closeModal() {
     this.elements.body.classList.remove('modal-open');
-    this.elements.modal.setAttribute('aria-hidden', true);
+    document.removeEventListener('keydown', this.keyPress);
   }
 }
