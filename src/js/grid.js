@@ -1,6 +1,6 @@
 import { MakeathonAPI } from './api.js';
 import { Modal } from './modal.js';
-import { encodeHTML, isSearch } from './utils.js';
+import { encodeHTML } from './utils.js';
 
 export class Grid {
   constructor() {
@@ -10,10 +10,6 @@ export class Grid {
   init() {
     this.makeathonAPI = new MakeathonAPI();
     this.modal = new Modal();
-
-    if (!isSearch()) {
-      this.setGrid();
-    }
 
     this.setElements();
     this.setEvents();
@@ -35,14 +31,17 @@ export class Grid {
       this.setModalContent(element);
     });
 
-    document.addEventListener('navigation:home', () => {
+    document.addEventListener('route:home', () => {
       this.modal.closeModal();
+      this.setGrid();
     });
 
     document.addEventListener('route:entry', () => {
       const element = document.querySelector(`${window.location.hash}-target`);
       if (element) {
         this.setModalContent(element);
+      } else {
+        this.setGrid();
       }
     });
 
@@ -53,10 +52,6 @@ export class Grid {
         this.setModalContent(element);
       }
     });
-  }
-
-  getRouteId() {
-    return window.location.hash.replace('#entry', '');
   }
 
   async setModalContent(element) {
@@ -99,7 +94,9 @@ export class Grid {
   }
 
   async setGrid(results) {
-    const data = results || await this.makeathonAPI.fetchData('entries/data.json');
+    const data = results || await this.makeathonAPI.fetchData({
+      url: 'entries/data.json'
+    });
     const dataLength = data.length < 50 ? 50 : data.length;
     let content = '';
 
@@ -121,7 +118,7 @@ export class Grid {
 
         content += `
           <div class="image-grid__item-wrapper">
-            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item" data-id="${entryId}" data-image="${image.medium}" data-name="${setName}" data-message="${encodeHTML(message)}">
+            <a id="${entryId}-target" href="#${entryId}" class="image-grid__item js-image-grid__item" data-id="${entryId}" data-image="${image.medium}" data-name="${setName}" data-message="${encodeHTML(message)}">
               <p class="sr-only">Read the message from ${setName}</p>
               <img class="image-grid__image js-lazy-image" data-src="${image.small}" data-alt="Photo of ${setName}'s knitted flower" />
             </a>

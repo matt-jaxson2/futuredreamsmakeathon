@@ -23,7 +23,7 @@ export class Search {
   }
 
   setEvents() {
-    document.addEventListener('search:query', (event) => {
+    document.addEventListener('route:search', (event) => {
       this.query = this.getQueryFromRoute(event.detail.route);
       this.openSearch();
       this.searchResults();
@@ -43,7 +43,10 @@ export class Search {
   async searchResults(reset) {
     this.isLoading();
 
-    const results = await this.makeathonAPI.fetchData(`search?term=${this.query}`);
+    const results = await this.makeathonAPI.fetchData({
+      url: 'entries/data.json',
+      query: this.query
+    });
 
     if (results.length > 0 && !reset) {
       this.isResults();
@@ -100,7 +103,7 @@ export class Search {
         break;
 
       case 'characters':
-        message = 'Search with at least 3 characters!';
+        message = 'Search with at least 3 characters.';
         break;
 
       default:
@@ -129,7 +132,7 @@ export class Search {
       </form>
     `;
 
-    this.modal.setContent(content);
+    this.modal.setContent(content, 'modal--search');
 
     this.afterRender();
   }
@@ -146,6 +149,10 @@ export class Search {
     this.elements.searchMessage = document.querySelector('.js-search__message');
 
     this.setInputValue(this.elements.searchInput);
+
+    setTimeout(() => {
+      this.elements.searchInput.focus();
+    }, 10);
 
     this.elements.searchButton.addEventListener('click', event => {
       event.preventDefault();

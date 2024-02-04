@@ -135,6 +135,10 @@
   width: 62px;
 }
 
+.modal--search .modal__close path {
+  stroke: var(--black);
+}
+
 @media (min-width: 576px) {
   .modal-open {
     overflow: auto;
@@ -147,6 +151,6 @@
 
 @media (min-width: 992px) {
   .modal {
-    --padding-end: 6.25rem;
+    --padding-end: 9.25rem;
   }
 }

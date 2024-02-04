@@ -13,6 +13,8 @@ export class Modal {
       content: document.querySelector('.js-modal__content'),
       closeButton: document.querySelector('.js-modal__close')
     }
+
+    this.defaultModalClass = this.elements.modal.className;
   }
 
   setEvents() {
@@ -30,9 +32,13 @@ export class Modal {
     });
   }
 
-  setContent(content) {
+  setContent(content, identifier) {
     if (this.elements.content.innerHTML !== content) {
       this.elements.content.innerHTML = content;
+      this.elements.modal.className = this.defaultModalClass;
+      if (identifier) {
+        this.elements.modal.classList.add(identifier);
+      }
     }
   }
 

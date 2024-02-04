@@ -1,16 +1,12 @@
 import { Grid } from './grid.js';
-// import { Search } from './search.js';
+import { Search } from './search.js';
 import { Router } from './router.js';
 
 const grid = new Grid();
 grid.init();
 
-// const search = new Search();
-// search.init();
-
-const adminRoute = () => {
-  window.location.assign('../admin/index.php');
-}
+const search = new Search();
+search.init();
 
 const customEventRoute = (eventName, data = {}) => {
   const customEvent = new CustomEvent(eventName, {
@@ -21,18 +17,14 @@ const customEventRoute = (eventName, data = {}) => {
 
 const _router = new Router({
   '': () => {
-    customEventRoute('navigation:home');
+    customEventRoute('route:home');
   },
   'entry*': () => {
-    customEventRoute('route:entry', {
-      route: window.location.hash
-    });
+    customEventRoute('route:entry');
   },
-  // 'search/*': () => {
-  //   customEventRoute('search:query', {
-  //     route: window.location.hash
-  //   });
-  // },
+  'search/*': () => {
+    customEventRoute('route:search');
+  },
 });
 
 window.addEventListener('beforeunload', () => {
