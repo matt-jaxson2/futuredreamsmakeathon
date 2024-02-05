@@ -2,9 +2,13 @@ export class Router {
   constructor(routes) {
     this.routes = routes;
     this.handleRouteChange = this.handleRouteChange.bind(this);
+
     window.addEventListener('hashchange', this.handleRouteChange);
-    window.addEventListener('load', this.handleRouteChange); // Handle initial non-hash route
-    this.handleRouteChange();
+
+    window.addEventListener('load', () => {
+      this.handleRouteChange();
+      window.removeEventListener('load', this.handleRouteChange);
+    });
   }
 
   handleRouteChange() {
