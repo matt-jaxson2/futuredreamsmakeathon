@@ -46,6 +46,7 @@ class admin
 
         $spaceFree = disk_free_space('./');
         $totalSpace = disk_total_space('./');
+        $entries->space = round(($spaceFree/$totalSpace) * 100) . "%";
 
         if ($existingData) {
 
@@ -58,20 +59,7 @@ class admin
             $entries->entries = [];
 
         }
-        $entries->space = $this->formatBytes($spaceFree, 2) . ' of ' . $this->formatBytes($totalSpace, 2);
         return $entries;
-    }
-
-    /**
-     * @param mixed $B
-     * @param mixed $D=2
-     * 
-     * @return [type]
-     */
-    private function formatBytes($B, $D=2){
-        $S = 'kMGTPEZY';
-        $F = floor((strlen($B) - 1) / 3);
-        return sprintf("%.{$D}f", $B/pow(1024, $F)).' '.@$S[$F-1].'B';
     }
 
     /**
