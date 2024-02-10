@@ -2,6 +2,8 @@ export class Modal {
   constructor() {
     this.keyPress = this.keyPress.bind(this);
 
+    this.identifier = 'default';
+
     this.setElements();
     this.setEvents();
   }
@@ -37,7 +39,10 @@ export class Modal {
       this.elements.content.innerHTML = content;
       this.elements.modal.className = this.defaultModalClass;
       if (identifier) {
-        this.elements.modal.classList.add(identifier);
+        this.elements.modal.classList.add(`modal--${identifier}`);
+        this.identifier = identifier;
+      } else {
+        this.identifier = 'default';
       }
     }
   }
@@ -49,14 +54,14 @@ export class Modal {
   }
 
   openModal() {
-    this.elements.body.classList.add('modal-open');
+    this.elements.body.classList.add('modal-open', `modal-open--${this.identifier}`);
     this.elements.closeButton.focus();
 
     document.addEventListener('keydown', this.keyPress);
   }
 
   closeModal() {
-    this.elements.body.classList.remove('modal-open');
+    this.elements.body.classList.remove('modal-open', `modal-open--${this.identifier}`);
     document.removeEventListener('keydown', this.keyPress);
   }
 }
