@@ -110,7 +110,7 @@ export class Grid {
       } else {
         const { imageSmall, imageMedium, message, name, id } = item;
         const entryId = `entry${id}`;
-        const setName = !!name.trim() ? name : 'Anonymous';
+        const setName = !!name.trim() ? name : 'Anon';
         const image = {
           small: `https://futuredreamsmakeathon.org.uk/${imageSmall}`,
           medium: `https://futuredreamsmakeathon.org.uk/${imageMedium}`

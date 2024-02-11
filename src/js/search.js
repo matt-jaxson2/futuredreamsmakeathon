@@ -132,7 +132,7 @@ export class Search {
       </form>
     `;
 
-    this.modal.setContent(content, 'modal--search');
+    this.modal.setContent(content, 'search');
 
     this.afterRender();
   }
@@ -163,6 +163,7 @@ export class Search {
 
       if (this.query.length >= 3) {
         setRoute(`search/${this.query}`);
+        this.scrollToTop();
       } else {
         this.setMessage('characters');
       }
@@ -172,6 +173,13 @@ export class Search {
       event.preventDefault();
 
       this.clearResults();
+    });
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
   }
 }

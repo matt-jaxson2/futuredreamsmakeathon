@@ -37,11 +37,11 @@
   padding: 2rem 1.5rem 1.5rem;
 }
 
-.modal-open {
+.modal-open--default {
   overflow: hidden;
 }
 
-.modal-open::before {
+.modal-open--default::before {
   bottom: 0;
   content: '';
   position: absolute;
@@ -140,11 +140,11 @@
 }
 
 @media (min-width: 576px) {
-  .modal-open {
+  .modal-open--default {
     overflow: auto;
   }
 
-  .modal-open::before {
+  .modal-open--default::before {
     display: none;
   }
 }
