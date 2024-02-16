@@ -7,7 +7,7 @@
   display: block;
   font-family:var(--font-body);
   font-size: 1.125rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.05rem;
   line-height: 1;
   padding: 0.875rem;
   pointer-events: all;
@@ -45,27 +45,16 @@
 }
 
 .button--style4 {
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--pink2);
 }
 
 .button--style4:not(:disabled):hover,
 .button--style4:not(:disabled):focus {
-  background-color: var(--pink3);
-}
-
-.button + .button {
-  margin-block-start: 0.25rem;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-
-@media (min-width: 375px) {
-  .button {
-    min-width: 318px;
-    width: auto;
-  }
 }

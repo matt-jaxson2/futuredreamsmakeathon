@@ -4,9 +4,20 @@ namespace futureDreams\functions;
 use Exception;
 use RuntimeException;
 
+/**
+ * [Description Entries]
+ */
+class Entries {
+    public $count;
+    public $entries;
+    public $space;
+}
+
+/**
+ * [Description admin]
+ */
 class admin
 {
-
     private const SMALL_WIDTH = 200;
     private const MEDIUM_WIDTH = 320;
 
@@ -28,15 +39,27 @@ class admin
     /**
      * @return [type]
      */
-    public function entries(): string
+    public function entries(): object
     {
         $existingData = $this->loadDataFromJson();
-        if ($existingData) {
-            $formatter = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
-            return $formatter->format(count($existingData));
-        }
+        $entries = new entries();
 
-        return "zero";
+        $spaceFree = disk_free_space('./');
+        $totalSpace = disk_total_space('./');
+        $entries->space = round(($spaceFree/$totalSpace) * 100) . "%";
+
+        if ($existingData) {
+
+            $formatter = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
+
+            $entries->count = $formatter->format(count($existingData));
+            $entries->entries = $existingData;
+        } else {
+            $entries->count = "Zero";
+            $entries->entries = [];
+
+        }
+        return $entries;
     }
 
     /**
@@ -96,7 +119,7 @@ class admin
      * @param string $fileName
      * @param mixed $delimiter
      * 
-     * @return array
+     * @return mixed
      */
     private function parseCsvData($fileName, $delimiter=',')
     {
@@ -180,6 +203,8 @@ class admin
     private function resizeImage(string $imageUrl, int $entryId, string $size): void
     {
         if (!$imageUrl) return;
+        $im = $this->imageFixOrientation($imageUrl, $entryId);
+
         $newWidth = match ($size) {
             'small' => self::SMALL_WIDTH,
             'medium' => self::MEDIUM_WIDTH,
@@ -189,9 +214,6 @@ class admin
         $targetFile = "../entries/images/$entryId-$size.jpg";
         if (!file_exists($targetFile)) {
             try {
-                $img = file_get_contents($imageUrl);
-                $im = imagecreatefromstring($img);
-
                 try {
                     $width = imagesx($im);
                     $height = imagesy($im);
@@ -205,7 +227,7 @@ class admin
 
                     if ($size === "small") {
 
-                        $sq = max($newWidth, $newHeight);
+                        $sq = self::SMALL_WIDTH;
 
                         if ($width > $height) {
                             $aspect = ($width / $height);
@@ -216,7 +238,7 @@ class admin
                         $offsetX = floor(($sq - $newWidth)/2);
                         $offsetY = floor(($sq - $newHeight)/2);
 
-                        $newImage = imagecreatetruecolor(self::SMALL_WIDTH, self::SMALL_WIDTH);
+                        $newImage = imagecreatetruecolor($sq, $sq);
                         imagecopyresampled($newImage, $im, $offsetX, $offsetY, 0, 0, $newWidth, $newHeight, $width, $height);
 
                     } else {
@@ -237,6 +259,32 @@ class admin
                 print_r($e);
             }
         }
-    }            
+    }
+
+    /**
+     * @param mixed $filename
+     * 
+     * @return [type]
+     */
+    private function imageFixOrientation($filename, $id) {
+        $exif = exif_read_data($filename);
+        if (!empty($exif['Orientation'])) {
+            $image = imagecreatefromjpeg($filename);
+                switch ($exif['Orientation']) {
+                case 1:
+                    break;
+                case 3:
+                    $image = imagerotate($image, 180, 0);
+                    break;
+                case 6:
+                    $image = imagerotate($image, -90, 0);
+                    break;
+                case 8:
+                    $image = imagerotate($image, 90, 0);
+                    break;
+            }
+            return $image;
+        }
+    }
 
 }

@@ -1,8 +1,18 @@
 .navigation {
-  display: flex;
-  flex-flow: column;
+  display: inline-flex;
+  flex-flow: wrap;
+  gap: 4px;
   justify-content: center;
   margin-block-end: 2rem;
+  width: 320px;
+}
+
+.navigation .button {
+  flex: 1;
+}
+
+.navigation .secondary-link {
+  width: 50%;
 }
 
 @media (min-width: 992px) {
