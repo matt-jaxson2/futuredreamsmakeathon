@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/so838i3vyr35/public_html/
-    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp -R /home/so838i3vyr35/repositories/futuredreamsmakeathonGIT/_build $DEPLOYPATH
