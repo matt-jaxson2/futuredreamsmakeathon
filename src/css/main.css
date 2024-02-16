@@ -26,10 +26,6 @@ body {
 }
 
 .wrapper {
-  /* background-image: url('/images/ribbon-small.jpg');
-  background-position: 100% 10rem;
-  background-repeat: no-repeat;
-  background-size: contain; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -70,20 +66,5 @@ body {
   pointer-events: none;
   position: fixed;
   transform: translateX(-50%);
-  width: 100%;
   z-index: 10;
 }
-
-/* @media (min-width: 768px) {
-  .wrapper {
-    background-image: url('/images/ribbon-large.jpg');
-    background-position: 100% 0;
-    background-size: 100%;
-  }
-} */
-
-/* @media (min-width: 1200px) {
-  .wrapper {
-    background-position: 100% -100px;
-  }
-} */

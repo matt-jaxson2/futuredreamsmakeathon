@@ -22,7 +22,13 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$entries = $admin->entries();
+    $entries = $admin->entries();
+
+    $preview = "";
+    foreach($entries->entries as $e) {
+      $img = "<img src="."../".$e['imageSmall']." width=40 height=40'>";
+      $preview .= "<li>" . $img . "#" . $e['id'] . ": " . $e['name'] . ": " . substr($e['message'], 0, strrpos(substr($e['message'], 0, 30), ' ')) . "&hellip;</li>";
+}
 
 ?>
 
@@ -88,7 +94,25 @@ $entries = $admin->entries();
       }
       button[type=submit]:hover {
         background-color: var(--pink2) !important;
-      }      
+      }
+      ul.preview {
+        list-style-type: none;
+        margin: 20px 0;
+        padding: 0;
+      }
+      ul.preview img {
+        margin: 0 10px 0 0;
+      }
+      .preview-outer {
+        margin-top: 20px;
+        border-top: 1px solid white;
+        overflow: scroll;
+        white-space: nowrap;
+        max-height: 250px;
+      }
+      .preview-inner {
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
@@ -101,14 +125,22 @@ $entries = $admin->entries();
         <div class="upload">
             <div class="upload_form">
               <div class="messages <?= $msg_type ?>"><h3><?php echo $msg ?></h3></div>
-              <form action="<?php echo htmlentities($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
+              <form id="upload" action="<?= htmlentities($_SERVER['PHP_SELF'])?>" method="post" enctype="multipart/form-data">
                   <label for="file-upload">
                     <p>Please select a (.csv) file to upload new entries.</p>
                   </label>
                     <input id="file-upload" type="file" name="csv_file" accept=".csv">
                   <button type="submit" name="submit">Upload CSV</button>
               </form>
-              <p>There are currently <?=$entries ?> entries available to display.</p>
+              <p>
+                There are currently <?=$entries->count ?> entries available to display.<br>
+                Disk space available <?=$entries->space ?>
+              </p>
+              <div class="preview-outer">
+                <div class='preview-inner'>
+                  <ul class="preview"><?= $preview ?></ul>
+                </div>
+              </div>
             </div>
         </div>
       </main>
