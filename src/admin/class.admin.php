@@ -46,7 +46,7 @@ class admin
 
         $spaceFree = disk_free_space('./');
         $totalSpace = disk_total_space('./');
-        $entries->space = round(($spaceFree/$totalSpace) * 100) . "%";
+        $entries->space = (100 - round((($totalSpace - $spaceFree)/$totalSpace) * 100)) . "%";
 
         if ($existingData) {
 
