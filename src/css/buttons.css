@@ -15,7 +15,6 @@
   text-decoration: none;
   text-wrap: nowrap;
   transition: all 0.3s ease;
-  width: 90%;
 }
 
 .button:not(:disabled):hover,

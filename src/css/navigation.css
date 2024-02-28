@@ -1,18 +1,13 @@
 .navigation {
-  display: inline-flex;
-  flex-flow: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 4px;
-  justify-content: center;
   margin-block-end: 2rem;
   width: 320px;
 }
 
-.navigation .button {
-  flex: 1;
-}
-
-.navigation .secondary-link {
-  width: 50%;
+.navigation .button--search {
+  grid-column: 1 / span 2;
 }
 
 @media (min-width: 992px) {
