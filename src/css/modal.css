@@ -23,7 +23,7 @@
   left: 50%;
   margin-block-start: var(--padding-start);
   margin-block-end: var(--padding-end);
-  max-height: calc(100vh - calc(var(--padding-start) + var(--padding-end)));
+  max-height: calc(100dvh - calc(var(--padding-start) + var(--padding-end)));
   max-width: 320px;
   overflow: auto;
   position: fixed;
