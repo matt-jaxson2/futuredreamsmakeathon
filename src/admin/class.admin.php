@@ -202,7 +202,7 @@ class admin
      */
     private function resizeImage(string $imageUrl, int $entryId, string $size): void
     {
-        if (!$imageUrl) return;
+        if (!$imageUrl || !@getimagesize($imageUrl)) return;
         $im = $this->imageFixOrientation($imageUrl, $entryId);
 
         $newWidth = match ($size) {
