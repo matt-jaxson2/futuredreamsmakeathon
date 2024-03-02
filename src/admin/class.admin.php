@@ -202,7 +202,7 @@ class admin
      */
     private function resizeImage(string $imageUrl, int $entryId, string $size): void
     {
-        if (!$imageUrl || !@getimagesize($imageUrl)) return;
+        if (!$imageUrl) return;
         $im = $this->imageFixOrientation($imageUrl, $entryId);
 
         $newWidth = match ($size) {
@@ -268,9 +268,10 @@ class admin
      */
     private function imageFixOrientation($filename, $id) {
         $exif = exif_read_data($filename);
+        $image = imagecreatefromjpeg($filename);
         if (!empty($exif['Orientation'])) {
-            $image = imagecreatefromjpeg($filename);
                 switch ($exif['Orientation']) {
+
                 case 1:
                     break;
                 case 3:
@@ -283,8 +284,8 @@ class admin
                     $image = imagerotate($image, 90, 0);
                     break;
             }
-            return $image;
         }
+        return $image;
     }
 
 }
