@@ -53,6 +53,17 @@
   color: var(--black);
 }
 
+.button--style5 {
+  background-color: var(--pink3);
+  color: var(--white);
+}
+
+.button--style5:not(:disabled):hover,
+.button--style5:not(:disabled):focus {
+  background-color: var(--white);
+  color: var(--black);
+}
+
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.5;

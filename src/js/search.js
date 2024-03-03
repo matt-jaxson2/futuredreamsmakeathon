@@ -17,8 +17,10 @@ export class Search {
 
   setElements() {
     this.elements = {
+      body: document.querySelector('body'),
       modalContent: document.querySelector('.js-modal__content'),
-      openButton: document.querySelector('.js-open-search-button')
+      openButton: document.querySelector('.js-open-search-button'),
+      clearButton: document.querySelector('.js-clear-search-button')
     }
   }
 
@@ -32,6 +34,11 @@ export class Search {
     this.elements.openButton.addEventListener('click', event => {
       event.preventDefault();
       this.openSearch();
+    });
+
+    this.elements.clearButton.addEventListener('click', event => {
+      event.preventDefault();
+      this.clearResults();
     });
   }
 
@@ -77,16 +84,15 @@ export class Search {
   }
 
   isResults() {
-    this.elements.container.classList.add('search--has-results');
+    this.elements.body.classList.add('search--has-results');
   }
 
   noResults() {
-    this.elements.container.classList.remove('search--has-results');
     this.setMessage('no-results');
   }
 
   clearResults() {
-    this.elements.container.classList.remove('search--has-results');
+    this.elements.body.classList.remove('search--has-results');
     this.query = '';
     setRoute();
     this.elements.searchInput.value = '';
@@ -142,7 +148,6 @@ export class Search {
   }
 
   afterRender() {
-    this.elements.container = document.querySelector('.js-search');
     this.elements.searchButton = document.querySelector('.js-search__button');
     this.elements.searchClearButton = document.querySelector('.js-search__clear-button');
     this.elements.searchInput = document.querySelector('.js-search__input');

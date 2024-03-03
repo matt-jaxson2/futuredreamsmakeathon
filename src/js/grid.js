@@ -17,6 +17,7 @@ export class Grid {
 
   setElements() {
     this.elements = {
+      body: document.querySelector('body'),
       grid: document.querySelector('.js-image-grid')
     }
   }
@@ -99,6 +100,10 @@ export class Grid {
     });
     const dataLength = data.length < 50 ? 50 : data.length;
     let content = '';
+
+    if (!results) {
+      this.elements.body.classList.remove('search--has-results');
+    }
 
     for (let i = 0; i < dataLength; i++) {
       const item = data[i];
