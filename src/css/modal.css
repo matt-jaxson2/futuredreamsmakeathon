@@ -44,7 +44,7 @@
 .modal-open--default::before {
   bottom: 0;
   content: '';
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -152,5 +152,8 @@
 @media (min-width: 992px) {
   .modal {
     --padding-end: 9.25rem;
+  }
+  .modal--search {
+    --padding-end: 6.15rem;
   }
 }

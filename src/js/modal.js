@@ -1,3 +1,5 @@
+import { removeClassesWithPrefix } from './utils.js';
+
 export class Modal {
   constructor() {
     this.keyPress = this.keyPress.bind(this);
@@ -54,6 +56,7 @@ export class Modal {
   }
 
   openModal() {
+    removeClassesWithPrefix(this.elements.body, 'modal-open--');
     this.elements.body.classList.add('modal-open', `modal-open--${this.identifier}`);
     this.elements.closeButton.focus();
 
@@ -61,7 +64,8 @@ export class Modal {
   }
 
   closeModal() {
-    this.elements.body.classList.remove('modal-open', `modal-open--${this.identifier}`);
+    removeClassesWithPrefix(this.elements.body, 'modal-open--');
+    this.elements.body.classList.remove('modal-open');
     document.removeEventListener('keydown', this.keyPress);
   }
 }

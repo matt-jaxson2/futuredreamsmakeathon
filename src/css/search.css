@@ -48,6 +48,18 @@
   padding: 0;
 }
 
+.button--search-clear {
+  display: none;
+}
+
+.search--has-results .button--search {
+  display: none;
+}
+
+.search--has-results .button--search-clear {
+  display: block;
+}
+
 @media (min-width: 375px) {
   .search__buttons .button {
     min-width: auto;
