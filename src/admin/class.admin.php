@@ -153,7 +153,8 @@ class admin
         foreach ($data as $row) {
             try {
                 $newRow = [];
-                if (!empty($row['File']) && !empty($row['Entry ID'])) {
+                $extension = pathinfo($row['File'], PATHINFO_EXTENSION);
+                if (!empty($row['File']) && !empty($row['Entry ID']) && in_array(strtolower($extension), array('jpg','jpeg'))) {
                     foreach (['small', 'medium'] as $size) {
                         $this->resizeImage($row['File'], $row['Entry ID'], $size);
                     }
